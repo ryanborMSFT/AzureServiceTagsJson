@@ -21,10 +21,11 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: GetAzureServiceTagsJson
-        run: ./GetAzureServiceTagsJson.ps1
         shell: pwsh
+        run: ./GetAzureServiceTagsJson.ps1
 
       - name: Commit files
+        shell: pwsh
         run: |
           Write-Output "***************************************"
           Write-Output "Performing Git Operations..."
