@@ -22,8 +22,9 @@ foreach ($id in $DownloadIds.GetEnumerator())
     $directDownloadUri = ($DetailsPage.Links |where-object {$_.outerhtml -like "*ServiceTags_*"})[0].href
     if ($directDownloadUri)
     {
+        $newDir = New-Item -ItemType Directory -Name $id.Name.ToString() -Force
         $fileName = $directDownloadUri.Split("/")[-1]
-        $outFile = ".attachments\AzureServiceTagsJson\$fileName"
+        $outFile = "$($newDir.PSPath)/$fileName"
         "- JSON found: $directDownloadUri"
         "- Downloading and saving to $outFile"
         $download = Invoke-WebRequest -Uri $directDownloadUri -OutFile $outFile
